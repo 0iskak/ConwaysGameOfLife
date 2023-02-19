@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+
+    <title>Document</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+
+        .cell {
+            border: 1px solid var(--border);
+        }
+
+        .cell.hovered {
+            cursor: pointer;
+            border-color: var(--selection);
+        }
+
+        .cell.alive {
+            background-color: var(--text-main);
+        }
+
+        .bottom {
+            display: flex;
+            column-gap: 1em;
+            row-gap: .3em;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .bottom > * {
+            display: flex; align-items: center; gap: .3em;
+        }
+    </style>
+</head>
+<body>
+
+<div id="grid" style="border: 2px solid var(--border); aspect-ratio: 1/1; display: grid; user-select: none">
+</div>
+
+<div class="bottom">
+    <form onsubmit="onRedraw(); return false;">
+        <label for="gridSize">Grid size:</label>
+        <input id="gridSize" type="number" value="10" min="5" max="1000">
+
+        <button type="submit">Redraw</button>
+    </form>
+    <form onsubmit="onStartStop(); return false;">
+        <label for="interval">Interval (ms):</label>
+        <input id="interval" type="number" value="100" min="1" max="1000">
+
+        <button id="startStop" type="submit"></button>
+    </form>
+
+    <form onsubmit="Grid.nextGeneration(); return false;">
+        <button type="submit">Next generation</button>
+    </form>
+</div>
+
+<script src="main.js"></script>
+<script>onRedraw(document.getElementById('gridSize').value);</script>
+
+</body>
+</html>
